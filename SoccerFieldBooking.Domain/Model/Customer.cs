@@ -2,7 +2,7 @@
 
 namespace SoccerFieldBooking.Domain.Model
 {
-    public class User : Entity
+    public class Customer : Entity
     {
         public string Name { get; set; }
         public string Phone { get; set; }

@@ -10,7 +10,7 @@ namespace InventoryManagement.Infrastructure.Persistence
         public DbSet<Company> Companies { get; set; }
         public DbSet<Field> Fields { get; set; }
         public DbSet<ContactPerson> Contacts { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Users { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
 
@@ -40,7 +40,7 @@ namespace InventoryManagement.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new FieldConfiguration());
             modelBuilder.ApplyConfiguration(new ReservationConfiguration());
             modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
             //modelBuilder.ApplyConfiguration(new FieldSizeConfiguration());
         }
     }
