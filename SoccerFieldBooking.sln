@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerFieldBooking.Domain", "SoccerFieldBooking.Domain\SoccerFieldBooking.Domain.csproj", "{9DFA6724-3478-4EEC-BD6F-D30065BF88A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoccerFieldBooking.Domain", "SoccerFieldBooking.Domain\SoccerFieldBooking.Domain.csproj", "{9DFA6724-3478-4EEC-BD6F-D30065BF88A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerFieldBooking.Infrastructure", "SoccerFieldBooking.Infrastructure\SoccerFieldBooking.Infrastructure.csproj", "{32151F06-93F5-45C5-AEB1-5E484E26F663}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoccerFieldBooking.Infrastructure", "SoccerFieldBooking.Infrastructure\SoccerFieldBooking.Infrastructure.csproj", "{32151F06-93F5-45C5-AEB1-5E484E26F663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerFieldBooking.API", "SoccerFieldBooking.API\SoccerFieldBooking.API.csproj", "{F2AA7362-BAD9-4B76-AADE-B46F52D5E9C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{32151F06-93F5-45C5-AEB1-5E484E26F663}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32151F06-93F5-45C5-AEB1-5E484E26F663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32151F06-93F5-45C5-AEB1-5E484E26F663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2AA7362-BAD9-4B76-AADE-B46F52D5E9C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2AA7362-BAD9-4B76-AADE-B46F52D5E9C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2AA7362-BAD9-4B76-AADE-B46F52D5E9C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2AA7362-BAD9-4B76-AADE-B46F52D5E9C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

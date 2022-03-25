@@ -14,20 +14,19 @@ namespace InventoryManagement.Infrastructure.Persistence
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
 
-        public ApplicationDbContext()
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
-            //Database.EnsureDeleted();
-            //Database.EnsureCreated();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //UseLazyLoadingProxies()  requires only the navigation properties be virtual
-            //optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = SoccerFieldBooking; Trusted_Connection = True; ",options => options.MaxBatchSize(100));
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //UseLazyLoadingProxies()  requires only the navigation properties be virtual
+        //    //optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = SoccerFieldBooking; Trusted_Connection = True; ",options => options.MaxBatchSize(100));
 
-            var connectionString = "Server = (localdb)\\mssqllocaldb; Database = SoccerFieldBooking; Trusted_Connection = True; ";
-            optionsBuilder.UseSqlServer(connectionString);
-        }
+        //    var connectionString = "Server = (localdb)\\mssqllocaldb; Database = SoccerFieldBooking; Trusted_Connection = True; ";
+        //    optionsBuilder.UseSqlServer(connectionString);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
