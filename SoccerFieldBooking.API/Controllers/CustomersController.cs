@@ -2,6 +2,7 @@
 using InventoryManagement.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SoccerFieldBooking.API.DataTransferableObjects;
 using SoccerFieldBooking.Domain.Model;
 
 namespace SoccerFieldBooking.API.Controllers
@@ -19,14 +20,14 @@ namespace SoccerFieldBooking.API.Controllers
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<CustomerDTO>>> GetCustomers()
         {
-            return await _context.Customers.ToListAsync();
+            return await _context.Customers.Select(c => GetCustomerDTO(c)).ToListAsync();
         }
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        public async Task<ActionResult<CustomerDTO>> GetCustomer(int id)
         {
             var customer = await _context.Customers.FindAsync(id);
 
@@ -35,20 +36,29 @@ namespace SoccerFieldBooking.API.Controllers
                 return NotFound();
             }
 
-            return customer;
+            return GetCustomerDTO(customer);
         }
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(int id, Customer customer)
+        public async Task<IActionResult> PutCustomer(int id, CustomerDTO customerDto)
         {
-            if (id != customer.Id)
+            if (id != customerDto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            customer.Name = customerDto.Name;
+            customer.Phone = customerDto.Phone;
+
+            //_context.Entry(customer).State = EntityState.Modified;
 
             try
             {
@@ -72,12 +82,13 @@ namespace SoccerFieldBooking.API.Controllers
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<CustomerDTO>> PostCustomer(CustomerDTO customerDto)
         {
+            var customer = GetCustomerFromDTO(customerDto);
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, customer);
+            return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, GetCustomerDTO(customer));
         }
 
         // DELETE: api/Customers/5
@@ -99,6 +110,15 @@ namespace SoccerFieldBooking.API.Controllers
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.Id == id);
+        }
+
+        private static CustomerDTO GetCustomerDTO(Customer customer)
+        {
+            return new CustomerDTO { Id = customer.Id, Name = customer.Name, Phone = customer.Phone };
+        }
+        private static Customer GetCustomerFromDTO(CustomerDTO customerDto)
+        {
+            return new Customer { Name = customerDto.Name, Phone = customerDto.Phone };
         }
     }
 }
