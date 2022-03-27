@@ -3,7 +3,7 @@ using SoccerFieldBooking.Domain.ValueObjects;
 
 namespace SoccerFieldBooking.Domain.Model
 {
-    public class Field : Entity
+    public class Field : Entity, IAggregateRoot
     {
         public string Name { get; set; }
         public decimal PricePerHour { get; set; }
