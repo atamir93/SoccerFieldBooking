@@ -2,7 +2,7 @@
 
 namespace SoccerFieldBooking.Domain.Model
 {
-    public class ContactPerson : Entity
+    public class ContactPerson : Entity, IAggregateRoot
     {
         public string Name { get; set; }
         public string Phone { get; set; }
