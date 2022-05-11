@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using SoccerFieldBooking.Domain.Common;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SoccerFieldBooking.Infrastructure.Repositories
 {
-    public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class, IAggregateRoot
+    public abstract class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
@@ -19,34 +21,39 @@ namespace SoccerFieldBooking.Infrastructure.Repositories
             this._dbSet = context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> List()
-        {
-            return _dbSet.ToList();
-        }
-
-        public TEntity GetById(int id)
-        {
-            return _dbSet.Find(id);
-        }
-
-        public void Insert(TEntity entity)
+        public async Task<int> Add(TEntity entity)
         {
             _dbSet.Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync(CancellationToken.None);
+            return entity.Id;
         }
 
-        public void Update(TEntity entity)
+        public async Task Delete(int id)
         {
-            _dbSet.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
+            var entity = await _dbSet.FindAsync(id);
+            if (entity != null)
+            {
+                _dbSet.Remove(entity);
+                await _context.SaveChangesAsync(CancellationToken.None);
+            }
         }
 
-        public void Delete(int id)
+        public async Task<TEntity> Get(int id)
         {
-            var entityToDelete = _dbSet.Find(id);
-            _dbSet.Remove(entityToDelete);
-            _context.SaveChanges();
+            var entity = await _dbSet.FindAsync(id);
+            return entity;
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAll()
+        {
+            var list = await _dbSet.ToListAsync();
+            return list;
+        }
+
+        public Task Update(TEntity entity)
+        {
+            _dbSet.Update(entity);
+            return _context.SaveChangesAsync(CancellationToken.None);
         }
     }
 }

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoccerFieldBooking.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoccerFieldBooking.Infrastructure", "SoccerFieldBooking.Infrastructure\SoccerFieldBooking.Infrastructure.csproj", "{32151F06-93F5-45C5-AEB1-5E484E26F663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerFieldBooking.API", "SoccerFieldBooking.API\SoccerFieldBooking.API.csproj", "{F2AA7362-BAD9-4B76-AADE-B46F52D5E9C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoccerFieldBooking.API", "SoccerFieldBooking.API\SoccerFieldBooking.API.csproj", "{F2AA7362-BAD9-4B76-AADE-B46F52D5E9C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

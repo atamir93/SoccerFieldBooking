@@ -1,5 +1,6 @@
 using InventoryManagement.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using SoccerFieldBooking.Infrastructure;
 using SoccerFieldBooking.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SoccerFieldBookingConnection"))
     //.EnableSensitiveDataLogging()
     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+
+builder.Services.AddInfrastrucutre(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

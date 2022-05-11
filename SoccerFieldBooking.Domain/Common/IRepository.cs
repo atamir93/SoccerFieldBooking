@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SoccerFieldBooking.Domain.Common
 {
-    public interface IRepository<T> where T : IAggregateRoot
+    public interface IRepository<T> where T : Entity
     {
-        IEnumerable<T> List();
-        T GetById(int id);
-        void Insert(T entity);
-        void Update(T entity);
-        void Delete(int id);
+        Task<int> Add(T entity);
+        Task Update(T entity);
+        Task Delete(int id);
+        Task<T> Get(int id);
+        Task<IEnumerable<T>> GetAll();
     }
 }
